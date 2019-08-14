@@ -1,0 +1,218 @@
+/* #0b0c10
+#1f2833
+#c5c6c7
+#66fcf1
+#45a29e */
+
+/* GENERAL */
+body {
+  background: #c5c6c7;
+}
+
+label {
+  color: #45a29e;
+}
+
+.textinput, .emailinput, .select, .textarea {
+  background: #1f2833;
+  color: #45a29e;
+}
+
+.textinput:focus, .emailinput:focus, .select:focus, .textarea:focus {
+  background: #1f2833;
+  color: #66fcf1;
+  box-shadow: 0 0 5px rgba(102, 252, 241, 0.64);
+  border: 1px solid rgba(102, 252, 241, 0.64);
+}
+
+
+
+
+
+/* Utilities */
+.color-grey {
+  color: #1f2833;
+}
+
+.color-white {
+  color: #c5c6c7;
+}
+
+.color-blue {
+  color: #66fcf1;
+}
+
+.color-green {
+  color: #45a29e;
+}
+
+.bg-grey {
+  background: #1f2833;
+}
+
+.bg-white {
+  background: #c5c6c7;
+}
+
+.bg-blue {
+  background: #66fcf1;
+}
+
+.bg-green {
+  background: #45a29e;
+}
+
+.btn-outline-blue {
+  color: #45a29e;
+  border-color: #45a29e;
+}
+
+.btn-outline-blue:hover {
+  color: #1f2833;
+  background-color: #66fcf1;
+  border-color: #66fcf1;
+  transition: 0.4s;
+}
+
+.btn-outline-grey {
+  color: #1f2833;
+  border-color: #1f2833;
+}
+
+.btn-outline-grey:hover {
+  color: #66fcf1;
+  background-color: #1f2833;
+  border-color: #1f2833;
+  transition: 0.4s;
+}
+
+.green-link {
+  color: #45a29e;
+}
+
+.green-link:hover {
+  color: #66fcf1;
+}
+
+
+
+
+
+
+/* NAVBAR */
+
+nav {
+  background-color: #1f2833;
+  color: #c5c6c7;
+}
+
+nav li, nav a {
+  color: #66fcf1;
+}
+
+nav li:hover, nav a:hover {
+  color: #45a29e;
+}
+
+.dropdown-item:hover {
+  background: #45a29e;
+  color: #c5c6c7;
+}
+
+
+/* Animated search bar */
+.overlay {
+  height: 100%;
+  width: 100%;
+  display: none;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0, 0.9);
+}
+
+
+.overlay-content {
+  position: relative;
+  top: 33%;
+  width: 80%;
+  text-align: center;
+  margin-top: 30px;
+  margin: auto;
+}
+
+.input-container {
+  width: 100%;
+}
+
+.overlay .closebtn {
+  position: absolute;
+  top: 20px;
+  right: 45px;
+  font-size: 60px;
+  cursor: pointer;
+  color: #66fcf1;
+}
+
+.overlay .closebtn:hover {
+  transition: 0.15s;
+  color: #45a29e;
+}
+
+.overlay input[type=text] {
+  padding: 15px;
+  font-size: 17px;
+  border: none;
+  width: 50%;
+  margin-right: auto;
+  margin-left: auto;
+  color: #c5c6c7;
+  background-color: rgba(0,0,0, 0.0);
+  outline: none !important;
+  border-bottom:1px solid #66fcf1;
+  border-radius: 4px;
+}
+
+.overlay input[type=text]:hover {
+  transition: 0.25s;
+  background-color: rgba(0,0,0, 0.1);
+}
+
+.overlay input[type=text]:focus {
+  box-shadow: 0px 0px 30px 10px rgba(102, 252, 241, 0.64);
+}
+
+.overlay button {
+  width: 5%;
+
+  padding: 5px;
+  background-color: rgba(0,0,0, 0.0);
+  color: #66fcf1;
+  font-size: 17px;
+  border: none;
+  cursor: pointer;
+}
+
+.overlay button:hover {
+  transition: 0.15s;
+  color: #45a29e;
+}
+
+
+/* searchbar trigger button */
+.search-trigger {
+  /* width: 35px;
+  height: 35px;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.33;
+  border-radius: 25px; */
+  color: #66fcf1;
+
+}
+
+.search-trigger:hover {
+  color: #45a29e;
+}

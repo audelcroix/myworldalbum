@@ -1,0 +1,30 @@
+{% extends 'album/base.html' %}
+
+{% load static %}
+
+
+{% block title %}
+Results - {{ query }}
+{% endblock %}
+
+{% block content %}
+
+
+  {% if photos|length > 0 %}
+    {% for photo in photos %}
+      <!-- <a href="{% url 'album:detail_photo' author_slug=photo.author.slug slug=photo.slug pk=photo.pk %}">
+        <img src="/media/{{ photo.img }}" class="float-left search-result-img mx-1 my-2" alt="{{ photo.description }}">
+      </a> -->
+      <div class="tooltipme">
+        <a href="{% url 'album:detail_photo' author_slug=photo.author.slug slug=photo.slug pk=photo.pk %}">
+          <img src="/media/{{ photo.img }}" class="float-left search-result-img mx-1 my-2" alt="{{ photo.description }}">
+        </a>
+        <span class="tooltiptext">{{ photo.title }}</span>
+      </div>
+    {% endfor %}
+  {% else %}
+    <h4>No result for {{ query }}</h4>
+  {% endif %}
+
+
+{% endblock %}

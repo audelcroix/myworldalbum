@@ -1,0 +1,294 @@
+/* #0b0c10
+#1f2833
+#c5c6c7
+#66fcf1
+#45a29e */
+
+/* FOOTER */
+/********************************/
+footer{
+  position:absolute;
+  bottom:0;
+  width:100%;
+  height:100px;
+  text-align: center;
+  background-color: #1e8bc3;
+  color: #FFFFFF;
+  padding-top: 10px;
+}
+
+
+
+
+/* Profil */
+/********************************/
+.mainrow {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.profile-pic {
+  max-height: 200px;
+  width:auto;
+}
+
+.author-description {
+  box-shadow: 0px 0px 30px 10px rgba(102, 252, 241, 0.64);
+}
+
+.commandsRow {
+  margin-bottom: 30px;
+}
+
+.search-result-img {
+  height: 160px;
+  width: auto;
+}
+
+.profile-img {
+  height: 160px;
+  width: auto;
+}
+
+.profile-img-container {
+  background-color: #22313f;
+}
+
+.profile-img-container img {
+  margin-left: 15%;
+  border-radius: 50%;
+  width: 180px;
+  height: 180px;
+  object-fit: cover;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+
+
+/* INDEX */
+/********************************/
+.carousel-demo-img {
+  width: 100%;
+  object-fit: cover;
+}
+
+@media screen and (min-width: 801px) {
+  .carousel-demo-img {
+    max-height: 400px;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .carousel-demo-img {
+    max-height: 200px;
+  }
+}
+
+/* If the screen size is 601px wide or more, set the font-size of <div> to 80px */
+@media screen and (min-width: 801px) {
+  .indexPresentationCartel h1 {
+    font-size: 30px;
+  }
+}
+
+/* If the screen size is 600px wide or less, set the font-size of <div> to 30px */
+@media screen and (max-width: 800) {
+  .indexPresentationCartel h1 {
+    font-size: 20px;
+  }
+}
+
+
+
+/* Photo */
+/********************************/
+
+.displayed-img {
+  max-width: 100%;
+  height: auto;
+}
+
+.img-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.photo-description {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 100%;
+  border: 1px solid black;
+
+  box-shadow: 0px 0px 30px 10px rgba(102, 252, 241, 0.64);
+}
+
+.description-area {
+  width: 80%;
+}
+
+.description-area a {
+  font-weight: bold;
+}
+
+.description-area h5, .description-area h6, .description-area p {
+  padding-left: 15px;
+  /* padding-top: 10px; */
+}
+
+.profile-pic-area {
+  width: 20%;
+  display: flex;
+  justify-content: center;
+}
+
+.authorProfilePic {
+  margin-left: 5%;
+  /* border-radius: 50%; */
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.modal-header {
+  border: none;
+}
+
+.modal-body {
+  text-align: center;
+}
+
+
+
+
+
+/* comments */
+
+#comment-zone {
+  margin-top: 30px;
+}
+
+.comment-area {
+  margin-bottom: 15px;
+  border: 1px solid black;
+  box-shadow: 0px 0px 20px 5px rgba(69, 162, 158, 0.64);
+}
+
+.commentProfilePic {
+  margin-left: 5%;
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.commentDeleteTrigger {
+  cursor: pointer;
+}
+
+
+.commentPaginationArea {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.commentPaginationArea a {
+  color: #45a29e;
+}
+
+.pagination li:not(.not-square) {
+  background-color: #45a29e;
+  margin-left: 2px;
+  margin-right: 2px;
+  padding-left: 4px;
+  padding-right: 4px;
+  border-radius: 2px;
+  color: #1f2833;
+}
+
+.pagination li:not(.not-square) a {
+  color: white;
+}
+
+.pagination li:not(.not-square).joinable-page:hover {
+  background: #66fcf1;
+}
+
+.joinable-page:hover {
+  background: #66fcf1;
+  color: #1f2833;
+}
+
+.pagination .not-square a:hover {
+  color: #66fcf1;
+}
+
+.not-square a, .not-square span  {
+  color: #45a29e;
+}
+
+#commentFormTextarea {
+  resize: none;
+  background: #1f2833;
+  color: #45a29e;
+}
+
+#commentFormTextarea:focus {
+  background: #1f2833;
+  color: #66fcf1;
+  box-shadow: 0 0 5px rgba(102, 252, 241, 0.64);
+  border: 1px solid rgba(102, 252, 241, 0.64);
+}
+
+#commentFormTextarea::placeholder {
+  color: #45a29e;
+}
+
+
+
+
+/* TOOLTIPS */
+/*************************/
+
+.tooltipme {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltipme .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: #1f2833;
+  color: #66fcf1;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+  top: 100%;
+  left: 50%;
+  margin-left: -60px;
+}
+
+.tooltipme .tooltiptext::after {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent #1f2833 transparent;
+}
+
+.tooltipme:hover .tooltiptext {
+  visibility: visible;
+}

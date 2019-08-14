@@ -1,0 +1,67 @@
+{% extends 'album/base.html' %}
+
+{% load static %}
+
+
+{% block title %}
+MyWorldAlbum - {{ photographer_info.user.username}}
+{% endblock %}
+
+{% block content %}
+
+  <div class="row mainrow">
+    <div class="col-sm-12 col-md-4">
+      <img class="profile-pic" src="{{ photographer_info.image.url }}" alt="{{ photographer_info.user.username }}'s profile pic">
+    </div>
+
+    <div class="col-sm-12 col-md-8 bg-grey author-description">
+
+      {% if user.photographer.pk == photographer_info.pk %}
+        <h2 class="color-blue">Welcome, {{ user.username }}</h2>
+
+        {% if photos|length > 0 %}
+          <p class="color-white">You have published {{ photos|length }} photo{{ photos|pluralize }}</p>
+        {% else %}
+          <p class="color-white">You haven't shared any picture yet</p>
+        {% endif %}
+
+      {% else %}
+
+        <h2 class="color-blue">>You are paying a visit to {{ photographer_info.user.username }}</h2>
+
+        {% if photos|length > 0 %}
+          <p class="color-white">This photographer has published {{ photos|length }} photo{{ photos|pluralize }}</p>
+        {% else %}
+          <p class="color-white">This photographer hasn't shared any picture yet</p>
+        {% endif %}
+
+      {% endif %}
+
+    </div>
+  </div>
+
+  {% if user.photographer.pk == photographer_info.pk %}
+    <div class="commandsRow">
+      <a href="{% url 'album:add_photo' %}" class="btn btn-outline-blue mr-2">
+        Add picture
+      </a>
+      <a class="btn btn-outline-grey" href="{% url 'update_profile' photographer_info.slug %}">
+        Update profile
+      </a>
+    </div>
+  {% endif %}
+
+
+  <div class="resultArea">
+    {% if photos|length > 0 %}
+      {% for photo in photos %}
+        <a href="{% url 'album:detail_photo' author_slug=photo.author.slug slug=photo.slug pk=photo.pk %}">
+          <img src="/media/{{ photo.img }}" class="profile-img mx-1 my-2" alt="{{ photo.description }}">
+        </a>
+      {% endfor %}
+    {% else %}
+    <h4>This photographer hasn't shared any picture yet</h4>
+    {% endif %}
+  </div>
+
+{% endblock %}

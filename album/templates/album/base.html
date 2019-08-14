@@ -1,0 +1,133 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  <link rel="stylesheet" type="text/css" href="{% static 'css/album/main.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/album/master.css' %}">
+
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
+
+  {% if title %}
+  <title>MyWorldAlbum - {{ title }}</title>
+  {% else %}
+  <title>MyWorldAlbum</title>
+  {% endif %}
+
+</head>
+
+<body>
+  <header class="">
+    <nav class="navbar navbar-expand-lg">
+
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="main-navbar">
+
+        <a class="navbar-brand ml-2 mr-4" href="#">MyWorldAlbum</a>
+
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+
+          <li class="nav-item">
+            <a class="nav-item nav-link" href="{% url 'album:homepage' %}">Home</a>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+              Categories
+            </a>
+            <div class="dropdown-menu bg-grey">
+              <a class="dropdown-item color-blue" href="/search/?q=animal">Animal</a>
+              <a class="dropdown-item color-blue" href="/search/?q=art">Art</a>
+              <a class="dropdown-item color-blue" href="/search/?q=landscape">Landscape</a>
+              <a class="dropdown-item color-blue" href="/search/?q=nature">Nature</a>
+              <a class="dropdown-item color-blue" href="/search/?q=people">People</a>
+              <a class="dropdown-item color-blue" href="/search/?q=sky">Sky</a>
+            </div>
+          </li>
+
+          <li class="nav-item">
+            <button class="btn search-trigger" name="button" onclick="open_searchbar()"><i class="fas fa-search fa-lg"></i></button>
+          </li>
+
+        </ul>
+
+        <div class="navbar-nav">
+          {% if user.is_authenticated %}
+          <a class="nav-item nav-link" href="{% url 'album:add_photo' %}">New Picture</a>
+          <a class="nav-item nav-link" href="{% url 'photographer_home' slug=user.photographer.slug %}">Profile</a>
+          <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
+          {% else %}
+          <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
+          <a class="nav-item nav-link" href="{% url 'register' %}">Register</a>
+          {% endif %}
+        </div>
+
+      </div>
+
+    </nav>
+  </header>
+
+  <main role="main" class="container">
+
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }} {% if message.tags == "error" %}alert-danger{% endif %}">
+      {{ message }}
+    </div>
+    {% endfor %}
+    {% endif %}
+
+    {% block content %}
+
+    {% endblock %}
+
+  </main>
+
+  <div id="search-modal" class="overlay">
+    <span class="closebtn" onclick="close_searchbar()" title="Close Search-bar">×</span>
+    <div class="overlay-content">
+      <form action="{% url 'album:search_bar' %}" class="form-inline" method="GET">
+        {% csrf_token %}
+        <div class="input-container">
+          <input id="searchbar-field" type="text" placeholder="Explore the community's pictures!" name="q">
+          <button type="submit"><i class="fa fa-search fa-lg"></i></button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
+  <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+  <script>
+    function open_searchbar() {
+      document.getElementById("search-modal").style.display = "block";
+      document.getElementById("searchbar-field").focus();
+    }
+
+    function close_searchbar() {
+      document.getElementById("search-modal").style.display = "none";
+    }
+  </script>
+
+  {% block scriptblock %}
+  {% endblock %}
+</body>
+
+</html>

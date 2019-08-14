@@ -1,0 +1,57 @@
+{% extends 'album/base.html' %}
+{% load bootstrap4 %}
+
+{% block title %}
+MyWorldAlbum - {{ display_category }}
+{% endblock %}
+
+{% block bodyblock %}
+
+
+  <div class="resultArea">
+    {% if photos|length > 0 %}
+      {% for photo in photos %}
+      <a href="{% url 'album:photo_detail' pk=photo.pk %}">
+        <img src="/media/{{ photo.img }}" class="result-floater profile-img mx-1 my-2" alt="{{ photo.title }}, by {{ photo.author }}">
+      </a>
+      {% endfor %}
+    {% else %}
+      <h4>This category is empty!</h4><br>
+      <h4>Why not share your own pictures?</h4>
+    {% endif %}
+  </div>
+
+  <div class="sqdqsd">
+    ssdsd
+  </div>
+
+  <div class="sqdqsd">
+    ssdsd
+  </div>
+
+  <div class="commentPaginationArea">
+    {% if page_obj.has_other_pages %}
+      <ul class="pagination">
+        {% if page_obj.has_previous %}
+          <li class="not-square mr-2"><a href="?page=1">first</a></li>
+          <li class="not-square mr-1"><a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+        {% else %}
+          <li class="disabled not-square"><span>&laquo;</span></li>
+        {% endif %}
+        {% for i in page_obj.paginator.page_range %}
+          {% if page_obj.number == i %}
+            <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+          {% else %}
+            <li><a href="?page={{ i }}">{{ i }}</a></li>
+          {% endif %}
+        {% endfor %}
+        {% if page_obj.has_next %}
+          <li class="not-square ml-1"><a href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+          <li class="not-square ml-2"><a href="?page={{ page_obj.paginator.num_pages }}">last</a></li>
+
+        {% endif %}
+      </ul>
+    {% endif %}
+  </div>
+
+{% endblock %}
