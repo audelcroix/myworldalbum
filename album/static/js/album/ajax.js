@@ -23,7 +23,10 @@ $(document).ready(function() {
                 $("#comment-zone").prepend("<div class='comment-area bg-grey' data-commentId="+json.newCommentId+"> <div class='row no-gutters'> <div class='col-md-2 col-sm-0 profile-pic-area'></div> <div class='col-md-10 col-sm-12 description-area'></div> </div> </div>");
                 $("#comment-zone div.profile-pic-area:first").append("<img src='/media/"+json.userImg+"' class='commentProfilePic' alt='"+json.username+"'>");
                 $("#comment-zone div.description-area:first").append("<h6 class='pt-1 color-green'>By "+json.username+" <a class='text-danger commentDeleteTrigger float-right mr-2 mt-1'><i class='far fa-trash-alt fa-lg'></i></a></h6><p class='color-white'>"+comment_content+"</p>");
-                $("#comment-zone div.comment-area:last").remove();
+
+                if ($("#comment-zone").children(".comment-area").length > 5) {
+                  $("#comment-zone div.comment-area:last").remove();
+                }
                 $("#commentFormTextarea").val("");
               } else {
                 alert("An error occured");
@@ -31,8 +34,8 @@ $(document).ready(function() {
           },
 
           error : function(xhr,errmsg,err) {
-              $('#results').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: "+errmsg+
-                  " <a href='#' class='close'>&times;</a></div>"); // add the error to the dom
+            $('.error-zone').css("display", "block");
+            $('.error-target').val('Sorry, an error occured');
           }
       });
   }

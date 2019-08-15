@@ -164,8 +164,6 @@ footer{
 
 
 
-
-
 /* comments */
 
 #comment-zone {
@@ -250,6 +248,17 @@ footer{
   color: #45a29e;
 }
 
+.error-zone {
+  border: 1px solid #d63031;
+  color: #d63031;
+  border-radius: 4px;
+  background-color: #fab1a0;
+  display: none;
+}
+
+.error-target {
+  padding: 8px 6px;
+}
 
 
 

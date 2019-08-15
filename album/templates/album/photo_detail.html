@@ -36,12 +36,14 @@
     </div>
   </div>
 
+  <div class="error-zone my-2">
+    <p class="error-target"></p>
+  </div>
 
   <div class="commentFormArea">
     {% if user.is_authenticated %}
     <h5>Add your comment</h5>
     <textarea class="form-control mb-2" id="commentFormTextarea" form="commentFormEXP" rows="4" cols="50" placeholder="Your comment" id='commentTextArea' required></textarea>
-    <!-- <form class="" id='commentFormEXP' action="#" method="POST"> -->
     <form class="" id='commentFormEXP' action="{% url 'album:add_comment' %}" method="POST">
       {% csrf_token %}
       <input type="hidden" id="photoId" value="{{ photo_info.pk }}">
