@@ -21,7 +21,8 @@ TEMPLATE_DIR = os.path.join(BASE_DIR, "templates")
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '+_gy9)bd%#h158%lqar-vxzh7o6k$c+i!x23it@uhqd_4q97i-'
+with open("MyWorldAlbum/comments.txt", "r") as text_file:
+    SECRET_KEY = text_file.readline().strip()
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -111,7 +112,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Paris'
 
 USE_I18N = True
 
