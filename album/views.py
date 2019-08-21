@@ -7,14 +7,12 @@ from django.contrib.auth.decorators import login_required
 from django.urls import reverse, reverse_lazy
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
+from datetime import datetime
+
+import os
 
 from .models import *
 
-
-# def handler404(request):
-#     return render(request, '404.html', status=404)
-# def handler500(request):
-#     return render(request, '500.html', status=500)
 
 def error_404(request, exception):
     context = {"title": "Not found"}
@@ -43,14 +41,12 @@ class PhotoCreateView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
     def get_success_url(self):
-        # photo = self.get_object()
+
         return reverse_lazy("album:detail_photo", kwargs={
             'pk':self.object.pk,
             'slug':self.object.slug,
             'author_slug':self.request.user.photographer.slug
             })
-        # return reverse_lazy("album:homepage")
-
 
 
 class PhotoUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView): #attention, l'ordre des class importe!!!!
@@ -79,7 +75,7 @@ class PhotoUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView): #att
         return reverse_lazy("album:detail_photo", kwargs={
             'pk':photo.pk,
             'slug':photo.slug,
-            'author_slug':photo.author.slug
+            'author_slug':photo.author.slug,
             })
 
 
@@ -95,6 +91,13 @@ class PhotoDetailView(DetailView):
         comments = Paginator(self.object.comment_set.all().order_by("-date_posted"), 5)
         context['comments'] = comments.get_page(page)
         context['comments_number'] = self.object.comment_set.count()
+
+        #check if picture file exists
+        if os.path.isfile("."+self.object.img.url):
+            context['allowed'] = True
+        else:
+            context['allowed'] = False
+
 
         # for the page title
         photo = self.get_object()
@@ -172,6 +175,9 @@ def AddCommentView(request):
             response_data['userImg'] = str(request.user.photographer.image)
             response_data['username'] = str(request.user.username)
             response_data['newCommentId'] = comment.pk
+
+            date_cur = datetime.now()
+            response_data['date'] = date_cur.strftime("%m/%d, %H:%M")
 
             return JsonResponse(response_data)
         except Photo.DoesNotExist:

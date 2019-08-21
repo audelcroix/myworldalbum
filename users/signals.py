@@ -1,4 +1,4 @@
-from django.db.models.signals import post_save, post_delete, pre_save
+from django.db.models.signals import post_save, post_delete
 from django.contrib.auth.models import User
 from django.dispatch import receiver
 from .models import Photographer
@@ -19,6 +19,5 @@ def save_photographer(sender, instance, **kwargs):
 
 @receiver(post_delete, sender=Photographer)
 def delete_image(sender, instance, **kwargs):
-    print("DELETING USER PICTURE")
     if instance.image.name != "default.jpg":
         instance.image.delete(False)

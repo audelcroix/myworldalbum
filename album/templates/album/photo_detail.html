@@ -4,9 +4,16 @@
 
 
 {% block content %}
-  <div class="img-container">
-    <img src="{{ photo_info.img.url }}" class="img-responsive displayed-img" alt="{{ photo_info.title }}, by {{ photo_info.author }}">
-  </div>
+
+  {% if allowed %}
+    <div class="img-container">
+      <img src="{{ photo_info.img.url }}" class="img-responsive displayed-img" alt="{{ photo_info.title }}, by {{ photo_info.author }}">
+    </div>
+  {% else %}
+    <div class="img-load-error">
+      <h5>We are sorry, this image is unaccessible</h5>
+    </div>
+  {% endif %}
 
   <div class="photo-description bg-grey">
     <div class="row no-gutters">
@@ -18,18 +25,28 @@
 
       <div class="col-md-10 col-sm-12 description-area color-white">
         <h5 class="pt-2 color-blue">{{ photo_info.title }}</h5>
-        <h6>By <a href="{% url 'photographer_home' slug=photo_info.author.slug %}" class="green-link">{{ photo_info.author.user.username }}</a> in <a class="green-link" href="/search/?q={{ photo_info.category }}">{{ photo_info.category }}</a></h6>
+        <h6>
+          By <a href="{% url 'photographer_home' slug=photo_info.author.slug %}" class="green-link">{{ photo_info.author.user.username }}</a> in <a class="green-link" href="/search/?q={{ photo_info.category }}">{{ photo_info.category }}</a>
+          - posted {{ photo_info.date_posted|date:"l d F Y" }}
+        </h6>
         <p>{{ photo_info.description }}</p>
 
-        {% if photo_info.author.pk == user.photographer.pk %}
-          <button type="button" class="btn btn-outline-danger mb-1" data-toggle="modal" data-target="#deleteModal">
+        {% if photo_info.author.pk == user.photographer.pk or user.is_superuser %}
+          <button type="button" class="btn btn-outline-danger mb-1" data-toggle="modal" data-target="#deleteModal" title="Delete this picture">
             <i class="far fa-trash-alt fa-lg"></i>
           </button>
           <a href="{% url 'album:update_photo' author_slug=photo_info.author.slug slug=photo_info.slug pk=photo_info.pk %}">
-            <button type="button" class="btn btn-outline-blue mb-1">
+            <button type="button" class="btn btn-outline-blue mb-1" title="Edit this picture">
               <i class="fas fa-pencil-alt fa-lg"></i>
             </button>
           </a>
+          {% if user.is_superuser %}
+            <a href="/admin/album/photo/{{ photo_info.pk }}/change/">
+              <button type="button" class="btn btn-warning mb-1" title="See in admin panel">
+                <i class="fas fa-crown fa-lg"></i>
+              </button>
+            </a>
+          {% endif %}
         {% endif %}
 
       </div>
@@ -70,6 +87,7 @@
               {% if photo_info.author.pk == user.photographer.pk or comment.author.pk == user.photographer.pk  %}
                 <a class="text-danger commentDeleteTrigger float-right mr-2 mt-1"><i class="far fa-trash-alt fa-lg"></i></a>
               {% endif %}
+              <small class="float-right mr-2 mt-1">{{ comment.date_posted|date:"m/d, G:i" }}</small>
             </h6>
             <p class="color-white">{{ comment.content }}</p>
           </div>

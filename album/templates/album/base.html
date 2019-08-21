@@ -16,6 +16,9 @@
 
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 
+  <link rel="shortcut icon" type="image/png" href="{% static 'site_pictures/album/myworldalbum_favicon.png' %}"/>
+
+  <script src="{% static 'js/album/search_controls.js' %}"></script>
 
   {% if title %}
   <title>MyWorldAlbum - {{ title }}</title>
@@ -99,7 +102,6 @@
     <span class="closebtn" onclick="close_searchbar()" title="Close Search-bar">×</span>
     <div class="overlay-content">
       <form action="{% url 'album:search_bar' %}" class="form-inline" method="GET">
-        {% csrf_token %}
         <div class="input-container">
           <input id="searchbar-field" type="text" placeholder="Explore the community's pictures!" name="q">
           <button type="submit"><i class="fa fa-search fa-lg"></i></button>
@@ -114,17 +116,6 @@
   <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-
-  <script>
-    function open_searchbar() {
-      document.getElementById("search-modal").style.display = "block";
-      document.getElementById("searchbar-field").focus();
-    }
-
-    function close_searchbar() {
-      document.getElementById("search-modal").style.display = "none";
-    }
-  </script>
 
   {% block scriptblock %}
   {% endblock %}

@@ -43,11 +43,16 @@ MyWorldAlbum - {{ photographer_info.user.username}}
   {% if user.photographer.pk == photographer_info.pk %}
     <div class="commandsRow">
       <a href="{% url 'album:add_photo' %}" class="btn btn-outline-blue mr-2">
-        Add picture
+        <i class="fas fa-plus"></i> Add picture
       </a>
       <a class="btn btn-outline-grey" href="{% url 'update_profile' photographer_info.slug %}">
-        Update profile
+        <i class="fas fa-edit"></i> Update profile
       </a>
+      {% if user.is_superuser %}
+        <a class="btn btn-warning" href="admin/users/photographer/{{ photographer_info.pk }}/change/">
+          <i class="fas fa-edit"></i> See in admin panel
+        </a>
+      {% endif %}
     </div>
   {% endif %}
 
@@ -60,7 +65,13 @@ MyWorldAlbum - {{ photographer_info.user.username}}
         </a>
       {% endfor %}
     {% else %}
-    <h4>This photographer hasn't shared any picture yet</h4>
+
+      {% if user.photographer.pk == photographer_info.pk %}
+        <h4>You haven't shared any picture yet</h4>
+      {% else %}
+        <h4>This photographer hasn't shared any picture yet</h4>
+      {% endif %}
+
     {% endif %}
   </div>
 

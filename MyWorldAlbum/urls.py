@@ -30,7 +30,6 @@ urlpatterns = [
 
     path('photographers/<str:slug>/', user_views.UserProfileView, name="photographer_home"),
     path('photographers/<str:author_slug>/update/', user_views.profile_update, name="update_profile"),
-    #path('photographers/<str:username>/', user_views.UserProfileView, name="photographer_else"),
     path('', include("album.urls")),
 ]
 

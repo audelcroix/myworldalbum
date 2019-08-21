@@ -11,7 +11,6 @@ from .models import *
 
 def register(request):
     context = {}
-
     context["title"] = "Register"
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
@@ -19,8 +18,15 @@ def register(request):
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')
-            messages.success(request, f'Your account has been created! You are now able to log in')
-            return redirect('/')
+            password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect(reverse("photographer_home", kwargs={'slug':user.photographer.slug}))
+            else:
+                messages.error(request, f'We are sorry, an error occured')
+            # messages.success(request, f'Your account has been created! You can now log in')
+            # return redirect('/')
     else:
         form = UserRegisterForm()
         context["form"] = form

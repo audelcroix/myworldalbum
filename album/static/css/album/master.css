@@ -162,6 +162,12 @@ footer{
   text-align: center;
 }
 
+.img-load-error {
+  text-align: center;
+  width: 100%;
+  padding-top: 70px;
+  padding-bottom: 50px;
+}
 
 
 /* comments */
