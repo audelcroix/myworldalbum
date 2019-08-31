@@ -38,12 +38,20 @@
 
       <div class="collapse navbar-collapse" id="main-navbar">
 
-        <a class="navbar-brand ml-2 mr-4" href="#">MyWorldAlbum</a>
+        <a class="navbar-brand ml-2 mr-4" href="{% url 'album:homepage' %}">MyWorldAlbum</a>
 
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
 
           <li class="nav-item">
             <a class="nav-item nav-link" href="{% url 'album:homepage' %}">Home</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-item nav-link" href="https://audelcroix.com/">Portfolio</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-item nav-link" href="{% url 'about' %}">About</a>
           </li>
 
           <li class="nav-item dropdown">
@@ -85,11 +93,11 @@
   <main role="main" class="container">
 
     {% if messages %}
-    {% for message in messages %}
-    <div class="alert alert-{{ message.tags }} {% if message.tags == "error" %}alert-danger{% endif %}">
-      {{ message }}
-    </div>
-    {% endfor %}
+      {% for message in messages %}
+      <div class="alert alert-{{ message.tags }} {% if message.tags == "error" %}alert-danger{% endif %}">
+        {{ message }}
+      </div>
+      {% endfor %}
     {% endif %}
 
     {% block content %}

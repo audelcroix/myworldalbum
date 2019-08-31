@@ -2,6 +2,10 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
+  {% if user.is_authenticated %}
+    <br>
+    <h3 class="mt-5">You already have an account!</h3>
+  {% else %}
     <div class="content-section">
       <form method="POST">
         {% csrf_token %}
@@ -15,8 +19,10 @@
       </form>
       <div class="border-top pt-3">
         <small class="text-muted">
-          Already have an account? <a class="ml-2 green-link" href="#">Log In</a>
+          Already have an account? <a class="ml-1 green-link" href="{% url 'login' %}">Log In</a>
         </small>
       </div>
     </div>
+  {% endif %}
+
 {% endblock content %}

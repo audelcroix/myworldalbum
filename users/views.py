@@ -25,7 +25,6 @@ def register(request):
                 return redirect(reverse("photographer_home", kwargs={'slug':user.photographer.slug}))
             else:
                 messages.error(request, f'We are sorry, an error occured')
-            # messages.success(request, f'Your account has been created! You can now log in')
             # return redirect('/')
     else:
         form = UserRegisterForm()
@@ -99,3 +98,10 @@ def UserProfileView(request, slug):
     }
 
     return render(request, 'users/photographer_profile_home.html', context)
+
+def about(request):
+    context = {
+        "title": "About"
+    }
+
+    return render(request, 'users/about.html', context)

@@ -27,6 +27,7 @@ urlpatterns = [
     path('register/', user_views.register, name="register"),
     path('login/', user_views.photographer_connect, name='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name="users/logout.html"), name='logout'),
+    path('about/', user_views.about, name="about"),
 
     path('photographers/<str:slug>/', user_views.UserProfileView, name="photographer_home"),
     path('photographers/<str:author_slug>/update/', user_views.profile_update, name="update_profile"),

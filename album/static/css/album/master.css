@@ -6,7 +6,7 @@
 
 /* FOOTER */
 /********************************/
-footer{
+/* footer{
   position:absolute;
   bottom:0;
   width:100%;
@@ -15,7 +15,7 @@ footer{
   background-color: #1e8bc3;
   color: #FFFFFF;
   padding-top: 10px;
-}
+} */
 
 
 
@@ -306,4 +306,31 @@ footer{
 
 .tooltipme:hover .tooltiptext {
   visibility: visible;
+}
+
+
+/* About */
+.about_card {
+  text-align: center;
+  background-color: rgba(102, 252, 241, 0.4);
+  padding-top: 40px;
+  padding-bottom: 40px;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  border-radius: 12px;
+}
+
+.about_card img {
+  max-width: 85px;
+  margin-top: 30px;
+}
+
+.about_card a {
+  color: #1f2833;
+  text-decoration: underline;
+}
+
+.about_card a:hover {
+  color: #45a29e;
+  transition: 0.5s;
 }
