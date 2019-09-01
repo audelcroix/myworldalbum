@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse, reverse_lazy
 from django.contrib import messages
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from .forms import *
 from album.models import *
@@ -99,9 +99,43 @@ def UserProfileView(request, slug):
 
     return render(request, 'users/photographer_profile_home.html', context)
 
+
 def about(request):
     context = {
         "title": "About"
     }
 
     return render(request, 'users/about.html', context)
+
+
+@login_required
+def UserPasswordUpdate(request, author_slug):
+
+    if request.method == "POST":
+        pass_update_form = PasswordUpdateForm(request.POST)
+
+        if pass_update_form.is_valid():
+            new_password = pass_update_form.cleaned_data["new_password"]
+            old_password = pass_update_form.cleaned_data["old_password"]
+
+            checked = request.user.check_password(old_password)
+            if checked:
+                request.user.set_password(new_password)
+                request.user.save()
+                # auto logout after password update, so user has to be logged in again
+                update_session_auth_hash(request, request.user)
+                messages.success(request, f'Your password has been successfully updated')
+
+                return redirect(reverse("photographer_home", kwargs={'slug':user.photographer.slug}))
+            else:
+                messages.error(request, f'The given password is incorrect')
+
+    else:
+        pass_update_form = PasswordUpdateForm()
+
+    context = {
+        'pass_update_form': pass_update_form,
+        'title': 'Password update'
+    }
+
+    return render(request, 'users/password_update.html', context)

@@ -48,6 +48,9 @@ MyWorldAlbum - {{ photographer_info.user.username}}
       <a class="btn btn-outline-grey" href="{% url 'update_profile' photographer_info.slug %}">
         <i class="fas fa-edit"></i> Update profile
       </a>
+      <a class="btn btn-outline-green" href="{% url 'update_password' photographer_info.slug %}">
+        <i class="fas fa-key"></i> Update password
+      </a>
       {% if user.is_superuser %}
         <a class="btn btn-warning" href="admin/users/photographer/{{ photographer_info.pk }}/change/">
           <i class="fas fa-edit"></i> See in admin panel

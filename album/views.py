@@ -97,7 +97,7 @@ class PhotoDetailView(DetailView):
             context['allowed'] = True
         else:
             context['allowed'] = False
-        print("."+self.object.img.url)
+        #print("."+self.object.img.url)
 
         # for the page title
         photo = self.get_object()

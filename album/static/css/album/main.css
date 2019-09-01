@@ -74,6 +74,18 @@ label {
   transition: 0.4s;
 }
 
+.btn-outline-green {
+  color: #66fcf1;
+  border-color: #66fcf1;
+}
+
+.btn-outline-green:hover {
+  color: #c5c6c7;
+  background-color: #45a29e;
+  border-color: #45a29e;
+  transition: 0.4s;
+}
+
 .btn-outline-grey {
   color: #1f2833;
   border-color: #1f2833;
