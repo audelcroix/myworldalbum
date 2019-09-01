@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
 from django.utils.safestring import mark_safe
 from .models import Photographer
 
@@ -51,36 +51,35 @@ class ProfileUpdateForm(forms.ModelForm):
         }
 
 
-class PasswordUpdateForm(forms.Form):
+class PasswordUpdateForm(PasswordChangeForm):
     old_password = forms.CharField(
         label="Current password ",
         widget=forms.PasswordInput,
         help_text="Enter your current password"
     )
-    new_password = forms.CharField(
+    new_password1 = forms.CharField(
         label="New password ",
         widget=forms.PasswordInput,
         help_text=mark_safe("Choose carefully<br>Must contain at least 8 characters<br>Must not be only digits")
     )
-    new_password_conf = forms.CharField(
+    new_password2 = forms.CharField(
         label="Repeat new password ",
         widget=forms.PasswordInput,
         help_text="Type your new password again"
     )
 
-
     def clean(self):
         cleaned_data = super(PasswordUpdateForm, self).clean()
         old_password = cleaned_data.get('old_password')
-        new_password = cleaned_data.get('new_password')
-        new_password_conf = cleaned_data.get('new_password_conf')
+        new_password1 = cleaned_data.get('new_password1')
+        new_password2 = cleaned_data.get('new_password2')
 
-        if old_password == new_password:
+        if old_password == new_password1:
             raise forms.ValidationError(
                 "New password can't be the same as old password"
             )
 
-        if new_password_conf != new_password:
+        if new_password2 != new_password1:
             raise forms.ValidationError(
                 "New password confirmation doesn't match"
             )

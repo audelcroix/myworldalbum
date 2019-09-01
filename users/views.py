@@ -139,3 +139,29 @@ def UserPasswordUpdate(request, author_slug):
     }
 
     return render(request, 'users/password_update.html', context)
+
+
+@login_required
+def change_password(request, author_slug):
+    if request.method == "POST":
+        form = PasswordUpdateForm(data=request.POST, user=request.user)
+
+        if form.is_valid():
+            form.save()
+            update_session_auth_hash(request, form.user)
+            messages.success(request, f'Your password has been successfully updated')
+            print("VALID")
+            return redirect(reverse("photographer_home", kwargs={'slug':request.user.photographer.slug}))
+        else:
+            print("INVALID")
+            messages.error(request, f'The given password is incorrect')
+            return redirect(request.META['HTTP_REFERER'])
+    else:
+        form = PasswordUpdateForm(user=request.user)
+
+        context = {
+            'form': form,
+            'title': 'Password update'
+        }
+
+        return render(request, 'users/password_update.html', context)
