@@ -52,9 +52,21 @@ class ProfileUpdateForm(forms.ModelForm):
 
 
 class PasswordUpdateForm(forms.Form):
-    old_password = forms.CharField(label="Old password")
-    new_password = forms.CharField(label="New password")
-    new_password_conf = forms.CharField(label="Repeat new password")
+    old_password = forms.CharField(
+        label="Current password ",
+        widget=forms.PasswordInput,
+        help_text="Enter your current password"
+    )
+    new_password = forms.CharField(
+        label="New password ",
+        widget=forms.PasswordInput,
+        help_text=mark_safe("Choose carefully<br>Must contain at least 8 characters<br>Must not be only digits")
+    )
+    new_password_conf = forms.CharField(
+        label="Repeat new password ",
+        widget=forms.PasswordInput,
+        help_text="Type your new password again"
+    )
 
 
     def clean(self):
